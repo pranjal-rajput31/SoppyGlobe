@@ -1,20 +1,113 @@
+# ShoppyGlobe - E-Commerce Application
 
-my github link 
-https://github.com/pranjal-rajput31/SoppyGlobe/tree/main
+An advanced React-based e-commerce platform built with modern web technologies.
 
-# React + Vite
+**Repository:** [https://github.com/pranjal-rajput31/SoppyGlobe](https://github.com/pranjal-rajput31/SoppyGlobe)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Features
 
-Currently, two official plugins are available:
+✨ **Product Browsing**
+- Dynamic product listing with real-time filtering
+- Detailed product pages with specifications
+- Product images with native lazy loading
+- Search functionality across multiple fields
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🛒 **Shopping Cart**
+- Add/remove items from cart
+- Adjust product quantities
+- Real-time price calculations
+- Cart summary with tax calculations
 
-## React Compiler
+💳 **Checkout Process**
+- User details form (name, email, address)
+- Order summary display
+- Order placement with confirmation
+- Automatic cart clearing after purchase
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+⚡ **Performance Optimizations**
+- Code splitting with React.lazy
+- Suspense boundaries for smooth loading
+- Native image lazy loading (loading="lazy")
+- Redux state management for efficient updates
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **React 18** - UI library with hooks
+- **Vite** - Fast build tool and dev server
+- **Redux Toolkit** - State management
+- **React Router v6** - Client-side routing
+- **React Icons** - Icon library
+- **CSS** - Custom styling
+
+## Installation
+
+```bash
+npm install
+```
+
+## Development
+
+```bash
+npm run dev
+```
+
+## Build
+
+```bash
+npm run build
+```
+
+## Project Structure
+
+```
+src/
+├── components/     # React components
+├── hooks/         # Custom hooks
+├── store/         # Redux store, slices, selectors
+├── assets/        # Static assets
+├── App.jsx        # Main app component
+└── main.jsx       # Entry point
+```
+
+## Key Components
+
+- **ProductList** - Displays all products with search filtering
+- **ProductItem** - Individual product card with add to cart
+- **ProductDetail** - Detailed product information page
+- **Cart** - Shopping cart management
+- **CartItem** - Individual cart item component
+- **Checkout** - Order placement form
+- **Header** - Navigation and search bar
+- **Error** - Error page for route failures
+
+## Redux Store
+
+- **cartSlice** - Cart state (add, remove, update quantity, clear)
+- **searchSlice** - Search query state
+- **cartSelectors** - Memoized selectors for cart data
+
+## Features Implemented
+
+✅ Product listing and filtering
+✅ Shopping cart with full CRUD operations
+✅ Checkout with order placement
+✅ Code splitting and lazy loading
+✅ Image lazy loading for performance
+✅ Redux state management
+✅ Error handling with custom error page
+✅ Responsive design
+✅ Search functionality
+✅ Tax calculations and order summary
+
+## Future Enhancements
+
+- User authentication and accounts
+- Payment gateway integration
+- Order history tracking
+- Product reviews and ratings
+- Wishlist functionality
+- Admin dashboard
+
+---
+
+Built by **Pranjal Rajput** | Open Source E-Commerce Project
