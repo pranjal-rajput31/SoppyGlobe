@@ -1,7 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import './ProductItem.css';
-
 import { FaCartArrowDown } from "react-icons/fa";
 import { addItem } from '../store/cartSlice';
 
