@@ -60,6 +60,12 @@ npm run build
 ## Project Structure
 
 ```
+backend/
+|--config/---db.js
+|--controller--
+|--middleware--authMiddleware
+|--models---cart.js,product.js,user.js
+|--routes---auth.js,cart.js,order.js
 src/
 ├── components/     # React components
 ├── hooks/         # Custom hooks
@@ -99,15 +105,26 @@ src/
 ✅ Search functionality
 ✅ Tax calculations and order summary
 
-## Future Enhancements
+# 🛒 ShoppyGlobe
 
-- User authentication and accounts
-- Payment gateway integration
-- Order history tracking
-- Product reviews and ratings
-- Wishlist functionality
-- Admin dashboard
+ShoppyGlobe is a full‑stack e‑commerce app built with **MongoDB, Express.js, React, and JWT authentication**.  
+It lets users browse products, add them to a cart, and checkout securely — with cart state stored in MongoDB (no Redux).
+
+## 🚀 Features
+- User login & signup with JWT
+- Product listing with images, stock, discounts
+- Cart: add, update, remove, clear items
+- Checkout with shipping details & order summary
+- Backend REST API with Express & MongoDB
+
 
 ---
+
+
+
+
+
+
+
 
 Built by **Pranjal Rajput** | Open Source E-Commerce Project
