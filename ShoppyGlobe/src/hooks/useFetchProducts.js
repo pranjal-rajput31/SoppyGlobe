@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 const useFetchProducts = () => {
   const [products, setProducts] = useState([]);
@@ -10,17 +10,21 @@ const useFetchProducts = () => {
       try {
         setLoading(true);
         setError(null);
-        const response = await fetch('https://dummyjson.com/products');
-        
+
+        // ✅ Call your backend instead of dummyjson
+        const response = await fetch("http://localhost:5000/products");
+
         if (!response.ok) {
           throw new Error(`Error: ${response.statusText}`);
         }
-        
+
         const data = await response.json();
-        setProducts(data.products);
+
+        // ✅ Backend returns array directly
+        setProducts(data);
       } catch (err) {
         setError(err.message);
-        console.error('Failed to fetch products:', err);
+        console.error("Failed to fetch products:", err);
       } finally {
         setLoading(false);
       }
