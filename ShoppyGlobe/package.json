@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "start":"nodemon backend/server.js",
+    "start": "nodemon backend/server.js",
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.10.1",
+    "axios": "^1.13.2",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^9.0.0",
