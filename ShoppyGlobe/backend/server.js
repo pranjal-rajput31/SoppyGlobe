@@ -4,7 +4,7 @@ import connectDB from "./config/db.js";
 import productRoutes from "./routes/products.js";
 import cartRoutes from "./routes/cart.js";
 import authRoutes from "./routes/auth.js";
-
+import orderRoutes from "./routes/order.js";
 
 const app = express();
 
@@ -24,6 +24,7 @@ app.get("/health", (req, res) => res.json({ status: "ok" }));
 app.use("/products", productRoutes);
 app.use("/cart", cartRoutes);
 app.use("/auth", authRoutes);
+app.use("/orders", orderRoutes);
 // app.use("/products", productRoutes);
 // app.use("/cart", cartRoutes);
 // app.use("/auth", authRoutes);

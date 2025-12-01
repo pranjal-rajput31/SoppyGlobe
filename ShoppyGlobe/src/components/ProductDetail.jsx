@@ -2,18 +2,17 @@
 
 
 import { useParams, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import useFetchProducts from '../hooks/useFetchProducts';
 import { FaCartArrowDown } from "react-icons/fa";
 import './ProductDetails.css';
-import { addItem } from '../store/cartSlice';
+import axios from 'axios';
 
 function ProductDetail() {
   // Hooks
   const { products } = useFetchProducts();
   const { id } = useParams();
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+
 
   // ✅ Match MongoDB _id instead of dummyjson id
   const product = products.find((prod) => prod._id === id);
@@ -34,18 +33,26 @@ function ProductDetail() {
   }
 
   // Handler to add product to cart
-  const handleAddToCart = () => {
-    dispatch(
-      addItem({
-        id: product._id,          // ✅ MongoDB ID
-        name: product.name,       // ✅ backend field
-        price: product.price,
-        image: product.image,     // ✅ single image field
-        quantity: 1,
-      })
-    );
-    alert(`${product.name} added to cart!`);
+  const handleAddToCart = async (e) => {
+     e.preventDefault();
+    e.stopPropagation();
+
+    const token = localStorage.getItem("token"); // JWT from login
+
+    try {
+      await axios.post(
+        "http://localhost:5000/cart", // backend route
+        { productId: product._id, quantity: 1 },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      alert(`${product.name} added to cart!`);
+    } catch (err) {
+      console.error("Error adding to cart:", err);
+      alert("Failed to add item. Please log in first.");
+    }
   };
+
 
   // Render
   return (
