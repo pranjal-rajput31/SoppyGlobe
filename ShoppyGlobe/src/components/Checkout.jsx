@@ -1,42 +1,60 @@
-import React, { useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-import { selectCartItems, selectCartTotalPrice, selectCartTotalQuantity } from '../store/cartSelectors'
-import { clearCart } from '../store/cartSlice'
-import './Checkout.css'
+// 
+
+
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { selectCartItems, selectCartTotalPrice, selectCartTotalQuantity } from '../store/cartSelectors';
+import { clearCart } from '../store/cartSlice';
+import axios from 'axios';
+import './Checkout.css';
 
 function Checkout() {
-// Hooks
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const items = useSelector(selectCartItems)
-  const totalPrice = useSelector(selectCartTotalPrice)
-  const totalQuantity = useSelector(selectCartTotalQuantity)
-// State
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [address, setAddress] = useState('')
-  const [placed, setPlaced] = useState(false)
-// Handlers
-  const handlePlaceOrder = (e) => {
-    e.preventDefault()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const items = useSelector(selectCartItems);
+  const totalPrice = useSelector(selectCartTotalPrice);
+  const totalQuantity = useSelector(selectCartTotalQuantity);
 
-    // Basic validation
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [address, setAddress] = useState('');
+  const [placed, setPlaced] = useState(false);
+
+  const handlePlaceOrder = async (e) => {
+    e.preventDefault();
+
     if (!name.trim() || !email.trim() || !address.trim()) {
-      alert('Please fill in name, email and address before placing the order.')
-      return
+      alert('Please fill in name, email and address before placing the order.');
+      return;
     }
 
-    // Simulate placing order: clear cart, show message, redirect
-    dispatch(clearCart())
-    setPlaced(true)
+    const token = localStorage.getItem('token');
+    if (!token) {
+      alert('Please log in to place an order.');
+      return;
+    }
 
-    // After 1.8s redirect to home
-    setTimeout(() => {
-      navigate('/')
-    }, 1800)
-  }
-// Render
+    try {
+      // ✅ Call backend to place order
+      await axios.post(
+        'http://localhost:5000/orders',
+        { shipping: { name, email, address } }, // optional shipping info
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      dispatch(clearCart());
+      setPlaced(true);
+
+      setTimeout(() => {
+        navigate('/');
+      }, 1800);
+    } catch (err) {
+      console.error('Order failed:', err);
+      alert('Failed to place order.');
+    }
+  };
+
   return (
     <div className="checkout-page">
       <h1>Checkout</h1>
@@ -71,9 +89,9 @@ function Checkout() {
               {items && items.length > 0 ? (
                 items.map((it) => (
                   <div key={it.id} className="summary-item">
-                    <img src={it.image} alt={it.title} loading="lazy" />
+                    <img src={it.image} alt={it.name} loading="lazy" />
                     <div>
-                      <div className="s-title">{it.title}</div>
+                      <div className="s-title">{it.name}</div>
                       <div className="s-meta">Qty: {it.quantity}</div>
                     </div>
                     <div className="s-price">${(it.price * it.quantity).toFixed(2)}</div>
@@ -87,13 +105,13 @@ function Checkout() {
             <div className="summary-footer">
               <div className="row"><span>Items</span><span>{totalQuantity}</span></div>
               <div className="row"><span>Subtotal</span><span>${totalPrice.toFixed(2)}</span></div>
-              <div className="row total"><span>Total</span><span>${(totalPrice).toFixed(2)}</span></div>
+              <div className="row total"><span>Total</span><span>${totalPrice.toFixed(2)}</span></div>
             </div>
           </aside>
         </div>
       )}
     </div>
-  )
+  );
 }
 
-export default Checkout
+export default Checkout;

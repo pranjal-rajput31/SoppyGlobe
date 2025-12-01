@@ -1,29 +1,29 @@
-import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-import CartItem from './CartItem'
-import { selectCartSummary, selectCartItems } from '../store/cartSelectors'
-import { clearCart } from '../store/cartSlice'
-import './Cart.css'
+// 
 
+
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import CartItem from './CartItem';
+import { selectCartSummary, selectCartItems } from '../store/cartSelectors';
+import { clearCart } from '../store/cartSlice';
+import './Cart.css';
 
 function Cart() {
-// Hooks
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
-  const cartItems = useSelector(selectCartItems)
-  const { totalPrice, totalQuantity, isEmpty } = useSelector(selectCartSummary)
-// Handlers
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const cartItems = useSelector(selectCartItems);
+  const { totalPrice, totalQuantity, isEmpty } = useSelector(selectCartSummary);
+
   const handleClearCart = () => {
     if (window.confirm('Are you sure you want to clear your entire cart?')) {
-      dispatch(clearCart())
+      dispatch(clearCart());
     }
-  }
-// Calculations for the summary
-  const tax = (totalPrice * 0.1).toFixed(2)
-  const grandTotal = (parseFloat(totalPrice) + parseFloat(tax)).toFixed(2)
+  };
 
-  // Render empty cart state
+  const tax = (totalPrice * 0.1).toFixed(2);
+  const grandTotal = (parseFloat(totalPrice) + parseFloat(tax)).toFixed(2);
+
   if (isEmpty) {
     return (
       <div className="cart-container">
@@ -39,9 +39,9 @@ function Cart() {
           </button>
         </div>
       </div>
-    )
+    );
   }
-// Render cart with items
+
   return (
     <div className="cart-container">
       <div className="cart-header">
@@ -61,7 +61,7 @@ function Cart() {
           </div>
           <div className="cart-items-list">
             {cartItems.map((item) => (
-              <CartItem key={item.id} item={item} />
+              <CartItem key={item.id} item={item} />  //change made here
             ))}
           </div>
           <button
@@ -110,7 +110,7 @@ function Cart() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Cart
+export default Cart;
