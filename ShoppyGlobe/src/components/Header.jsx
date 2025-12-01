@@ -6,14 +6,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setQuery } from '../store/searchSlice';
 
 function Header() {
-  // Hooks
   const dispatch = useDispatch();
   const query = useSelector((state) => state.search.query || '');
-//Render
+
   return (
     <div className="header">
       <Link to="/">Home</Link>
-    
+
       <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '12px' }}>
         <input
           aria-label="Search products"
@@ -27,6 +26,10 @@ function Header() {
           <FaCartArrowDown />
           Cart
         </Link>
+
+        {/* ✅ Added Login and Register links */}
+        <Link to="/login">Login</Link>
+        <Link to="/register">Register</Link>
       </div>
     </div>
   );

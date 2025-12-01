@@ -13,7 +13,8 @@ const ProductDetail = lazy(() => import('./components/ProductDetail.jsx'));
 const Cart = lazy(() => import('./components/Cart.jsx'));
 const Checkout = lazy(() => import('./components/Checkout.jsx'));
 const ErrorPage = lazy(() => import('./components/Error.jsx'));
-
+const Login = lazy(() => import('./components/Login.jsx'));
+const Register = lazy(() => import('./components/Register.jsx'));
 const router = createBrowserRouter([
   {
     path: '/',
@@ -35,6 +36,16 @@ const router = createBrowserRouter([
     element: <Suspense fallback={<div>Loading...</div>}><Checkout /></Suspense>,
     errorElement: <Suspense fallback={<div>Loading...</div>}><ErrorPage /></Suspense>,
   },
+  {
+    path:"/login",
+    element:<Suspense fallback={<div>Loading...</div>}><Login /></Suspense>,
+    errorElement:<Suspense fallback={<div>Loading...</div>}><ErrorPage /></Suspense>,
+  },
+  {
+    path:"/register",
+    element:<Suspense fallback={<div>Loading...</div>}><Register /></Suspense>,
+    errorElement:<Suspense fallback={<div>Loading...</div>}><ErrorPage /></Suspense>,
+  }
 ]);
 
 createRoot(document.getElementById('root')).render(
